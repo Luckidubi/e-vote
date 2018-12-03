@@ -1,0 +1,48 @@
+/*! Place your custom styles here */
+.main-container .pos-vertical-center .fa-arrow-down{
+    display: none;
+}
+
+button[type="button"]:not([class*='col-']) {
+    width: 100%;
+}
+
+@media all and (max-width: 991px){
+    .main-container .pos-vertical-center .fa-arrow-down{
+        display: block;
+    }
+
+    .main-container .pos-vertical-center .fa-arrow-right{
+        display: none;
+    }
+
+    .main-container .pos-vertical-center .btn--primary{
+        margin-top: 4%;
+    }
+}
+
+@media all and (max-width: 767px){
+    .nav-container .modal-instance{
+        width: 100%;
+    }
+
+    .nav-container .menu-btn{
+        width: 50%;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .nav-container .modal-instance .modal-trigger{
+        width: 50%;
+        margin: 0 auto !important;
+    }
+
+    .nav-container nav .logo-light{
+        max-height: 50px !important;
+        /*margin: 0 auto !important;*/
+    }
+    
+    .nav-container nav .img-div{
+        text-align: center;
+    }
+}

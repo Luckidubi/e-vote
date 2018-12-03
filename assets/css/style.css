@@ -1,0 +1,22 @@
+*{
+  margin: 0px;
+}
+ .navbar-light .navbar-nav .nav-link:hover{
+	color: blue;
+}
+
+header {
+    background-color: #F1F1F1;
+    text-align: center;
+    padding-top: 50px;
+}
+.jumbotron{
+	position: relative;
+	margin:auto;
+	background: url(assets/img/la.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+    height: 100%;
+}

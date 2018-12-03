@@ -1,0 +1,85 @@
+/**
+ * Created by emeka on 12/30/17.
+ */
+var submitRequestBtn =  $('.submit-request');
+submitRequestBtn.click(function () {
+    var page = 'http://' + window.location.hostname + '/pricing';
+    var parentForm = $(this).parent().parent();
+    var url = parentForm.attr("action");
+    var data = parentForm.serialize();
+
+    waitingDialog.show('Sending...');
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: data,
+        success: function (response) {
+            waitingDialog.hide();
+            if (response.status === 1) {
+                var outputMessage = '<strong>' + response.message + '</strong>';
+                bootbox.alert(outputMessage, function () {
+                    parentForm[0].reset();
+                    $(location).attr('href', page);
+                });
+            } else {
+                var errors = ''; var i;
+                for (i in response.message) {
+                    errors +=  response.message[i] + '<br />';
+                }
+                bootbox.alert('<h3 class="text-center" style="color: #990000;"><span class="fa fa-warning"></span> Error</h3><p class="text-center" style="color: #990000;">' + errors + '</p>').find(".modal-footer .btn-primary").removeClass("btn-primary").addClass("btn-danger");
+            }
+
+
+        },
+        error: function () {
+            waitingDialog.hide();
+            bootbox.alert("<strong>Your booking was unsuccessful, Please try again</strong>", function () {
+            });
+        },
+        timeout: 10000
+    });
+
+    parentForm.unbind('submit');
+    return false;
+});
+
+
+var contactForm =  $('#enquiryForm');
+$('#enquiryButton').click(function () {
+    console.log("Testing the mic");
+    var url = contactForm.attr("action");
+    var data = contactForm.serialize();
+
+    waitingDialog.show('Sending...');
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: data,
+        success: function (response) {
+            waitingDialog.hide();
+            if (response.status === 1) {
+                var outputMessage = '<strong>' + response.message + '</strong>';
+                bootbox.alert(outputMessage, function () {
+                    contactForm[0].reset();
+                });
+            } else {
+                var errors = ''; var i;
+                for (i in response.message) {
+                    errors +=  response.message[i] + '<br />';
+                }
+                bootbox.alert('<h3 class="text-center" style="color: #990000;"><span class="fa fa-warning"></span> Error</h3><p class="text-center" style="color: #990000;">' + errors + '</p>').find(".modal-footer .btn-primary").removeClass("btn-primary").addClass("btn-danger");
+            }
+
+
+        },
+        error: function () {
+            waitingDialog.hide();
+            bootbox.alert("<strong>Your enquiry could not be sent, Please try again</strong>", function () {
+            });
+        },
+        timeout: 10000
+    });
+
+    contactForm.unbind('submit');
+    return false;
+});
